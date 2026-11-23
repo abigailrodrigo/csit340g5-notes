@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from 'react'
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import NoteCard from './NoteCard.jsx'
 
 const startingNotes = [
@@ -69,9 +69,9 @@ function Notes() {
     titleRef.current.focus()
   }
 
-    const handleDelete = (idToDelete) => {
+      const handleDelete = useCallback((idToDelete) => {
     setNotes(notes.filter((note) => note.id !== idToDelete))
-  }
+  }, [notes])
 
   const visibleNotes = useMemo(() => {
     return notes.filter((note) =>
@@ -133,9 +133,12 @@ function Notes() {
               className="relative min-h-32 bg-white px-6 py-5 shadow-[0_2px_4px_0_rgba(0,0,0,0.2),0_25px_50px_0_rgba(0,0,0,0.1)]"
             >
               <NoteCard
+                id={note.id}
                 title={note.title}
                 body={note.body}
+                onDelete={handleDelete}
               />
+            
             <button
                 type="button"
                 onClick={() => handleDelete(note.id)}
