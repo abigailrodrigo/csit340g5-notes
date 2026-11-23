@@ -25,9 +25,9 @@ function Notes() {
     return saved ? JSON.parse(saved) : startingNotes
   })
 
-    const [formData, setFormData] = useState({
-    title: '',
-    body: '',
+  const [formData, setFormData] = useState(() => {
+    const savedDraft = localStorage.getItem('draft')
+    return savedDraft ? JSON.parse(savedDraft) : { title: '', body: '' }
   })
 
     useEffect(() => {
