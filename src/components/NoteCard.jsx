@@ -16,6 +16,7 @@ function NoteCard({ title, body }) {
       >
         {title}
       </h3>
+      
       {isOpen && (
         <p
           className={
@@ -28,7 +29,13 @@ function NoteCard({ title, body }) {
         </p>
       )}
       
-      {/* Your Show more/less button and × button stay right here */}
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className="mt-2 cursor-pointer text-[15px] text-[#b83f45] hover:underline"
+      >
+        {isOpen ? 'Show less' : 'Show more'}
+      </button>
     </div>
   )
 }
